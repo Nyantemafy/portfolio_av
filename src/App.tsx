@@ -55,6 +55,8 @@ import organisationSheetAfter from '../assets/organisation/sheet/apres.png';
 import organisationNotionOne from '../assets/organisation/notion/1.png';
 import organisationNotionTwo from '../assets/organisation/notion/2.png';
 import cvPdf from '../assets/cv/CVNyAntemaAssistant.pdf';
+import profilePhoto from '../assets/photo/photo.jpeg';
+import avatarPhoto from '../assets/photo/avatar.jpeg';
 
 // --- Types ---
 interface Project {
@@ -523,8 +525,13 @@ const Hero = ({ onContactClick, onCvClick }: HeroProps) => {
             <span className="text-brand-primary italic">claires et efficaces</span>
           </h1>
           <p className="text-lg text-gray-600 mb-10 max-w-lg leading-relaxed">
-            Je fais le pont entre l'expression créative et la rigueur technique. 
-            Ancienne slameuse devenue danseuse et développeuse, je bâtis les fondations digitales de votre vision.
+            Assistante virtuelle organisée, proactive et polyvalente avec une forte
+            expertise en outils digitaux, gestion de projet et développement
+            d’applications. Capable de gérer des missions administratives,
+            marketing et techniques. Expérience en freelance avec gestion directe
+            de clients, conception de solutions digitales et utilisation d’outils
+            modernes (IA, design, développement). Excellente communication et
+            autonomie.
           </p>
           <div className="flex flex-wrap gap-4">
             <motion.a
@@ -551,13 +558,12 @@ const Hero = ({ onContactClick, onCvClick }: HeroProps) => {
             className="relative z-10"
           >
             <img 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000" 
+              src={profilePhoto} 
               alt="Profil Professionnel"
               className="rounded-[2rem] shadow-2xl w-full object-cover aspect-[4/5] cursor-zoom-in"
-              data-lightbox-src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000"
+              data-lightbox-src={profilePhoto}
               data-lightbox-type="image"
               data-lightbox-title="Profil Professionnel"
-              referrerPolicy="no-referrer"
             />
             <motion.div 
               animate={{ y: [0, -20, 0] }}
@@ -565,13 +571,12 @@ const Hero = ({ onContactClick, onCvClick }: HeroProps) => {
               className="absolute -bottom-10 -left-10 w-48 h-48 rounded-3xl overflow-hidden shadow-xl border-8 border-white"
             >
               <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" 
+                src={avatarPhoto} 
                 alt="Côté Créatif"
                 className="w-full h-full object-cover cursor-zoom-in"
-                data-lightbox-src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
+                data-lightbox-src={avatarPhoto}
                 data-lightbox-type="image"
                 data-lightbox-title="Côté Créatif"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
           </motion.div>
