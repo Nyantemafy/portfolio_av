@@ -32,6 +32,31 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { cn } from './lib/utils';
+import canvaIcon from '../assets/icone/canva-removebg-preview.png';
+import powerpointIcon from '../assets/icone/powerpoint-removebg-preview.png';
+import capcutIcon from '../assets/icone/capcut-removebg-preview.png';
+import openAiIcon from '../assets/icone/openAI-removebg-preview.png';
+import deepseekIcon from '../assets/icone/deepseek-removebg-preview.png';
+import copilotIcon from '../assets/icone/copilote-removebg-preview.png';
+import linkedinIcon from '../assets/icone/linkdin-removebg-preview.png';
+import cuaExperienceImage from '../assets/experience/gestionPanneau.png';
+import massageByMiExperienceImage from '../assets/experience/massagebymi1.png';
+import marketingPosterImage from '../assets/marketingD/Marketing_poster.png';
+import posterDesignImage from '../assets/marketingD/Poster_design.png';
+import mainTranscriptionVideo from '../assets/Transcription/3D_TikTok_Video_The_scene_depicts_a_young_person_overwhelmed_by_d7VLbUyw.mp4';
+import transcriptionAudioVideo from '../assets/Transcription/transcription_audio/FJV4P-w-.mp4';
+import transcriptionCaptionsVideo from '../assets/Transcription/transcription_audio/AI captions - FJV4P-w-.mp4.mp4';
+import transcriptionText from '../assets/Transcription/transcription_audio/FJV4P-w-.txt?raw';
+import organisationEmailBefore from '../assets/organisation/email/1.png';
+import organisationEmailLabels from '../assets/organisation/email/2.png';
+import organisationEmailAfter from '../assets/organisation/email/3.png';
+import organisationSheetBefore from '../assets/organisation/sheet/avant.png';
+import organisationSheetAfter from '../assets/organisation/sheet/apres.png';
+import organisationNotionOne from '../assets/organisation/notion/1.png';
+import organisationNotionTwo from '../assets/organisation/notion/2.png';
+import cvPdf from '../assets/cv/CVNyAntemaAssistant.pdf';
+import profilePhoto from '../assets/photo/photo.jpeg';
+import avatarPhoto from '../assets/photo/avatar.jpeg';
 
 // --- Types ---
 interface Project {
@@ -62,6 +87,21 @@ interface Demo {
   };
 }
 
+interface LightboxMedia {
+  src: string;
+  type: 'image' | 'video';
+  title: string;
+}
+
+interface NavbarProps {
+  onContactClick: () => void;
+}
+
+interface HeroProps {
+  onContactClick: () => void;
+  onCvClick: () => void;
+}
+
 // --- Data ---
 const PROJECTS: Project[] = [
   {
@@ -70,7 +110,7 @@ const PROJECTS: Project[] = [
     description: "Conception d’une application de gestion de panneaux publicitaires. Création de maquettes et design visuel avec Figma et Canva. Conception de bases de données et rédaction de cahier des charges.",
     role: "Développeuse Freelance",
     tags: ["Figma", "Canva", "Base de données", "Gestion de projet"],
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800"
+    image: cuaExperienceImage
   },
   {
     title: "Massage by mi",
@@ -78,27 +118,27 @@ const PROJECTS: Project[] = [
     description: "Application de gestion d'employés. Réalisation complète en solo : planification, relation client, conception logique et maquettes, développement et déploiement.",
     role: "Développeuse Freelance",
     tags: ["Fullstack", "UI/UX", "Gestion d'employés", "Déploiement"],
-    image: "https://images.unsplash.com/photo-1544161515-4af6b1d462c2?auto=format&fit=crop&q=80&w=800"
+    image: massageByMiExperienceImage
   }
 ];
 
 const TOOLS_DIGITAL: Tool[] = [
   { name: "Figma", icon: "https://cdn.simpleicons.org/figma" },
-  { name: "Canva", icon: "https://cdn.simpleicons.org/canva" },
+  { name: "Canva", icon: canvaIcon },
   { name: "Notion", icon: "https://cdn.simpleicons.org/notion" },
-  { name: "PowerPoint", icon: "https://cdn.simpleicons.org/microsoftpowerpoint" },
+  { name: "PowerPoint", icon: powerpointIcon },
   { name: "Google Sheets", icon: "https://cdn.simpleicons.org/googlesheets" },
   { name: "Google Calendar", icon: "https://cdn.simpleicons.org/googlecalendar" },
-  { name: "CapCut", icon: "https://cdn.simpleicons.org/capcut" },
-  { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai" },
+  { name: "CapCut", icon: capcutIcon },
+  { name: "OpenAI", icon: openAiIcon },
   { name: "Claude", icon: "https://cdn.simpleicons.org/anthropic" },
   { name: "Gemini", icon: "https://cdn.simpleicons.org/google" },
-  { name: "DeepSeek", icon: "https://cdn.simpleicons.org/deepseek" },
-  { name: "Copilot", icon: "https://cdn.simpleicons.org/microsoft" }
+  { name: "DeepSeek", icon: deepseekIcon },
+  { name: "Copilot", icon: copilotIcon }
 ];
 
 const SOCIAL_MEDIA: Tool[] = [
-  { name: "LinkedIn", icon: "https://cdn.simpleicons.org/linkedin" },
+  { name: "LinkedIn", icon: linkedinIcon },
   { name: "GitHub", icon: "https://cdn.simpleicons.org/github" },
   { name: "Facebook", icon: "https://cdn.simpleicons.org/facebook" },
   { name: "Instagram", icon: "https://cdn.simpleicons.org/instagram" },
@@ -142,29 +182,52 @@ const DEMOS: Demo[] = [
     category: "Marketing Digital",
     shortDesc: "Descriptions d'objets et stratégies d'acquisition client.",
     icon: <FileText size={24} />,
-    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800",
+    image: marketingPosterImage,
     details: {
-      context: "Démonstration de rédaction persuasive et descriptive pour le web.",
+      context: "Deux créations Canva réalisées pour présenter une idée, capter l'attention et traduire un message en visuel impactant.",
       tools: ["Google Docs", "ChatGPT", "Canva"],
       content: (
         <div className="space-y-6">
-          <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-            <h4 className="font-bold text-brand-primary mb-2">1. Description d'Objet (L'Œuvre)</h4>
-            <p className="text-sm text-gray-600 italic mb-3">Exemple de description captivante pour un objet d'art ou de design.</p>
-            <p className="text-sm leading-relaxed">
-              "Plus qu'un simple objet, cette pièce incarne l'équilibre parfait entre la matière brute et la finesse artisanale. 
-              Chaque courbe raconte une histoire, chaque reflet invite à la contemplation. Un ajout intemporel pour un intérieur qui a du caractère."
+          <div className="p-5 bg-gray-50 rounded-2xl border border-gray-100">
+            <h4 className="font-bold text-brand-primary mb-2">Mes démos marketing réalisées avec Canva</h4>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              J'utilise Canva pour transformer une intention marketing en support visuel prêt à être partagé sur le web ou les réseaux sociaux.
+              Chaque création cherche à faire ressortir le message, la hiérarchie d'information et l'impact visuel.
             </p>
           </div>
-          <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-            <h4 className="font-bold text-brand-primary mb-2">2. Stratégie d'Agence (Attraction Client)</h4>
-            <p className="text-sm text-gray-600 italic mb-3">Structure marketing pour attirer de nouveaux prospects.</p>
-            <ul className="text-sm space-y-2 list-disc pl-5">
-              <li>Accroche : "Votre visibilité mérite une expertise qui vous ressemble."</li>
-              <li>Problématique : "Pourquoi 80% des entreprises échouent à convertir leur audience ?"</li>
-              <li>Solution : "Une approche centrée sur l'humain et optimisée par l'IA."</li>
-              <li>Appel à l'action : "Réservez votre audit gratuit dès aujourd'hui."</li>
-            </ul>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              {
+                title: "Marketing Poster",
+                description: "Affiche orientée communication et visibilité, pensée pour attirer rapidement l'œil."
+              },
+              {
+                title: "Poster Design",
+                description: "Travail plus graphique centré sur l'équilibre entre design, lisibilité et style."
+              }
+            ].map((item, index) => {
+              const imageSrc = index === 0 ? marketingPosterImage : posterDesignImage;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm cursor-zoom-in"
+                  data-lightbox-src={imageSrc}
+                  data-lightbox-type="image"
+                  data-lightbox-title={item.title}
+                >
+                  <img
+                    src={imageSrc}
+                    alt={item.title}
+                    className="w-full aspect-[4/5] object-cover"
+                  />
+                  <div className="p-4">
+                    <h5 className="font-bold text-sm text-brand-primary mb-2">{item.title}</h5>
+                    <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-3">Cliquer pour agrandir</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )
@@ -178,37 +241,92 @@ const DEMOS: Demo[] = [
     icon: <Video size={24} />,
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
     details: {
-      context: "Démonstration de la valeur ajoutée par une transcription intelligente et organisée.",
-      tools: ["CapCut", "Google Docs", "Notion"],
+      context: "Projet complet de création vidéo et de transcription, depuis la génération du contenu jusqu'au sous-titrage final.",
+      tools: ["Luma", "ChatGPT", "TurboScribe", "CapCut"],
       content: (
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-3 bg-red-50 rounded-lg border border-red-100">
-              <h5 className="text-xs font-bold text-red-800 mb-2">AVANT (Brut)</h5>
-              <p className="text-[10px] text-gray-500 leading-tight">
-                "euh alors on va parler de la gestion de projet euh c'est important de savoir que euh y'a plusieurs étapes d'abord on planifie puis on fait le truc et voilà..."
-              </p>
+          <div className="rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 p-4">
+            <h4 className="font-bold text-brand-primary mb-2">Vidéo finale</h4>
+            <p className="text-sm text-gray-600 mb-4">
+              Vidéo générée avec Luma. Le script et l'image principale ont été créés avec ChatGPT, puis le sous-titrage final a été intégré avec CapCut.
+            </p>
+            <div
+              className="cursor-zoom-in"
+              data-lightbox-src={mainTranscriptionVideo}
+              data-lightbox-type="video"
+              data-lightbox-title="Vidéo finale"
+            >
+              <video
+                src={mainTranscriptionVideo}
+                controls
+                preload="metadata"
+                className="w-full rounded-2xl bg-black aspect-[9/16] object-contain"
+              />
             </div>
-            <div className="p-3 bg-green-50 rounded-lg border border-green-100">
-              <h5 className="text-xs font-bold text-green-800 mb-2">APRÈS (Optimisé)</h5>
-              <p className="text-[10px] text-gray-700 leading-tight font-medium">
-                <strong>Gestion de Projet : Les Étapes Clés</strong><br/>
-                1. Planification stratégique<br/>
-                2. Exécution opérationnelle<br/>
-                3. Suivi et ajustements
-              </p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-3">Cliquer sur la vidéo pour l'agrandir</p>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="font-bold text-brand-primary">Étapes de réalisation</h4>
+            <div className="space-y-4">
+              <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Étape 1</p>
+                <h5 className="font-bold mb-2">Audio simple généré avec Luma</h5>
+                <div
+                  className="cursor-zoom-in"
+                  data-lightbox-src={transcriptionAudioVideo}
+                  data-lightbox-type="video"
+                  data-lightbox-title="Étape 1 - Audio simple"
+                >
+                  <video
+                    src={transcriptionAudioVideo}
+                    controls
+                    preload="metadata"
+                    className="w-full rounded-xl bg-black"
+                  />
+                </div>
+              </div>
+
+              <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Étape 2</p>
+                <h5 className="font-bold mb-2">Transcription brute obtenue avec TurboScribe</h5>
+                <div className="rounded-xl bg-white border border-gray-100 p-4 max-h-56 overflow-auto">
+                  <pre className="text-xs text-gray-600 whitespace-pre-wrap leading-relaxed font-sans">
+                    {transcriptionText}
+                  </pre>
+                </div>
+              </div>
+
+              <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Étape 3</p>
+                <h5 className="font-bold mb-2">Sous-titrage final réalisé avec CapCut</h5>
+                <div
+                  className="cursor-zoom-in"
+                  data-lightbox-src={transcriptionCaptionsVideo}
+                  data-lightbox-type="video"
+                  data-lightbox-title="Étape 3 - Sous-titrage final"
+                >
+                  <video
+                    src={transcriptionCaptionsVideo}
+                    controls
+                    preload="metadata"
+                    className="w-full rounded-xl bg-black"
+                  />
+                </div>
+              </div>
             </div>
           </div>
+
           <div className="space-y-3">
-            <h4 className="font-bold text-brand-primary">Valeur Ajoutée</h4>
+            <h4 className="font-bold text-brand-primary">Valeur apportée</h4>
             <ul className="text-sm space-y-2">
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
-                <span><strong>Organisation :</strong> Ponctuation parfaite, paragraphes aérés et bullet points pour une lecture rapide.</span>
+                <span><strong>Production complète :</strong> idéation, génération, transcription et finition vidéo dans un seul workflow.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
-                <span><strong>Clarté :</strong> Suppression des tics de langage et reformulation pour un ton professionnel.</span>
+                <span><strong>Lisibilité :</strong> passage d'un contenu brut à une vidéo claire, sous-titrée et exploitable pour la diffusion.</span>
               </li>
             </ul>
           </div>
@@ -222,33 +340,121 @@ const DEMOS: Demo[] = [
     category: "Productivité",
     shortDesc: "To-do lists, mise en forme de documents et tableaux de bord.",
     icon: <ClipboardList size={24} />,
-    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
+    image: organisationNotionOne,
     details: {
-      context: "Mise en place de systèmes d'organisation pour particuliers et entreprises.",
-      tools: ["Notion", "Google Calendar", "Trello"],
+      context: "Organisation d'emails, structuration de tableaux et planification personnelle avec Notion pour faire gagner du temps et de la clarté.",
+      tools: ["Notion", "Google sheet", "Gmail"],
       content: (
         <div className="space-y-6">
-          <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-            <h4 className="font-bold text-brand-primary mb-3">Exemples de Réalisations</h4>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm">
-                <div className="w-8 h-8 bg-brand-secondary rounded flex items-center justify-center text-brand-primary">
-                  <CheckCircle2 size={18} />
+          <div className="p-5 bg-gray-50 rounded-2xl border border-gray-100">
+            <h4 className="font-bold text-brand-primary mb-3">Projet : Organisation d’une boîte email personnelle</h4>
+            <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
+              <p><strong>Contexte :</strong> boîte email contenant plus de 1500 messages non triés, mélangeant notifications, emails importants et promotions.</p>
+              <p><strong>Problème :</strong> emails non organisés, difficulté à retrouver les informations importantes, perte de temps quotidienne.</p>
+              <p><strong>Solution apportée :</strong> création de catégories, tri et archivage des emails, mise en place de filtres automatiques et organisation par priorité.</p>
+              <p><strong>Résultats :</strong> inbox simplifiée et structurée, accès rapide aux emails importants, gain de temps estimé à 1 à 2 heures par jour.</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="font-bold text-brand-primary">Organisation de la boîte email</h4>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  src: organisationEmailBefore,
+                  title: "Avant",
+                  description: "Boîte encombrée avec un grand volume d'emails non triés."
+                },
+                {
+                  src: organisationEmailLabels,
+                  title: "Mise en place des labels",
+                  description: "Création d'un système de catégories pour retrouver plus vite les messages."
+                },
+                {
+                  src: organisationEmailAfter,
+                  title: "Après archivage",
+                  description: "Inbox nettoyée, messages utiles visibles immédiatement."
+                }
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm cursor-zoom-in"
+                  data-lightbox-src={item.src}
+                  data-lightbox-type="image"
+                  data-lightbox-title={item.title}
+                >
+                  <img src={item.src} alt={item.title} className="w-full aspect-[4/3] object-cover" />
+                  <div className="p-4">
+                    <h5 className="font-bold text-sm text-brand-primary mb-2">{item.title}</h5>
+                    <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-3">Cliquer pour agrandir</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-bold">To-Do List Intelligente</p>
-                  <p className="text-[10px] text-gray-500">Priorisation par urgence et importance (Matrice d'Eisenhower).</p>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="font-bold text-brand-primary">Organisation de tableau</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                {
+                  src: organisationSheetBefore,
+                  title: "Sheet avant",
+                  description: "Base de travail encore dense, avec une lecture moins immédiate."
+                },
+                {
+                  src: organisationSheetAfter,
+                  title: "Sheet après",
+                  description: "Informations clarifiées et structure optimisée pour un meilleur suivi."
+                }
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm cursor-zoom-in"
+                  data-lightbox-src={item.src}
+                  data-lightbox-type="image"
+                  data-lightbox-title={item.title}
+                >
+                  <img src={item.src} alt={item.title} className="w-full aspect-[16/10] object-cover" />
+                  <div className="p-4">
+                    <h5 className="font-bold text-sm text-brand-primary mb-2">{item.title}</h5>
+                    <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-3">Cliquer pour agrandir</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm">
-                <div className="w-8 h-8 bg-brand-secondary rounded flex items-center justify-center text-brand-primary">
-                  <Layout size={18} />
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="font-bold text-brand-primary">Ma façon de planifier avec Notion</h4>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              J'utilise Notion pour centraliser mes tâches, suivre les priorités et garder une vue claire sur mes actions quotidiennes et mes livrables.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {[organisationNotionOne, organisationNotionTwo].map((src, index) => (
+                <div
+                  key={src}
+                  className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm cursor-zoom-in"
+                  data-lightbox-src={src}
+                  data-lightbox-type="image"
+                  data-lightbox-title={`Vue Notion ${index + 1}`}
+                >
+                  <img
+                    src={src}
+                    alt={`Organisation Notion ${index + 1}`}
+                    className="w-full aspect-[16/10] object-cover"
+                  />
+                  <div className="p-4">
+                    <h5 className="font-bold text-sm text-brand-primary mb-2">Vue Notion {index + 1}</h5>
+                    <p className="text-xs text-gray-600 leading-relaxed">
+                      Suivi visuel des tâches, priorités et planning personnel dans un espace de travail structuré.
+                    </p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mt-3">Cliquer pour agrandir</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-bold">Mise en forme de Documents</p>
-                  <p className="text-[10px] text-gray-500">Structuration de rapports complexes avec sommaires interactifs.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -259,7 +465,7 @@ const DEMOS: Demo[] = [
 
 // --- Components ---
 
-const Navbar = () => {
+const Navbar = ({ onContactClick }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -291,6 +497,7 @@ const Navbar = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={onContactClick}
           className="bg-brand-primary text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg shadow-brand-primary/20"
         >
           Me Contacter
@@ -300,7 +507,7 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => {
+const Hero = ({ onContactClick, onCvClick }: HeroProps) => {
   return (
     <section id="accueil" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
@@ -312,22 +519,32 @@ const Hero = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-brand-secondary text-brand-primary text-xs font-bold mb-6">
             Assistante Virtuelle & Développeuse
           </span>
-          <h1 className="text-6xl md:text-7xl font-serif leading-tight mb-6">
-            Concevoir des <span className="text-brand-primary italic">Systèmes</span> <br />
-            avec <span className="font-light">Cœur</span>
+          <h1 className="text-5xl md:text-7xl font-serif leading-tight mb-6">
+            Des solutions digitales
+            <br />
+            <span className="text-brand-primary italic">claires et efficaces</span>
           </h1>
           <p className="text-lg text-gray-600 mb-10 max-w-lg leading-relaxed">
-            Je fais le pont entre l'expression créative et la rigueur technique. 
-            Ancienne slameuse devenue danseuse et développeuse, je bâtis les fondations digitales de votre vision.
+            Assistante virtuelle organisée, proactive et polyvalente avec une forte
+            expertise en outils digitaux, gestion de projet et développement
+            d’applications. Capable de gérer des missions administratives,
+            marketing et techniques. Expérience en freelance avec gestion directe
+            de clients, conception de solutions digitales et utilisation d’outils
+            modernes (IA, design, développement). Excellente communication et
+            autonomie.
           </p>
           <div className="flex flex-wrap gap-4">
-            <motion.button
+            <motion.a
+              href="#projets"
               whileHover={{ scale: 1.02 }}
               className="bg-brand-primary text-white px-8 py-4 rounded-xl font-medium flex items-center gap-2"
             >
-              Explorer mon travail <ArrowRight size={18} />
-            </motion.button>
-            <button className="px-8 py-4 rounded-xl border border-gray-200 font-medium hover:bg-gray-50 transition-colors">
+              Découvrir mes projets <ArrowRight size={18} />
+            </motion.a>
+            <button
+              onClick={onCvClick}
+              className="px-8 py-4 rounded-xl border border-gray-200 font-medium hover:bg-gray-50 transition-colors"
+            >
               Voir mon CV
             </button>
           </div>
@@ -341,10 +558,12 @@ const Hero = () => {
             className="relative z-10"
           >
             <img 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000" 
+              src={profilePhoto} 
               alt="Profil Professionnel"
-              className="rounded-[2rem] shadow-2xl w-full object-cover aspect-[4/5]"
-              referrerPolicy="no-referrer"
+              className="rounded-[2rem] shadow-2xl w-full object-cover aspect-[4/5] cursor-zoom-in"
+              data-lightbox-src={profilePhoto}
+              data-lightbox-type="image"
+              data-lightbox-title="Profil Professionnel"
             />
             <motion.div 
               animate={{ y: [0, -20, 0] }}
@@ -352,10 +571,12 @@ const Hero = () => {
               className="absolute -bottom-10 -left-10 w-48 h-48 rounded-3xl overflow-hidden shadow-xl border-8 border-white"
             >
               <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" 
+                src={avatarPhoto} 
                 alt="Côté Créatif"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover cursor-zoom-in"
+                data-lightbox-src={avatarPhoto}
+                data-lightbox-type="image"
+                data-lightbox-title="Côté Créatif"
               />
             </motion.div>
           </motion.div>
@@ -370,10 +591,16 @@ const Profile = () => {
   return (
     <section id="à-propos" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl font-serif mb-4">Profil Professionnel</h2>
           <p className="text-gray-500 italic">Organisée. Proactive. Leadership.</p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-3 gap-8">
           <motion.div 
@@ -421,10 +648,16 @@ const Experience = () => {
   return (
     <section id="projets" className="py-24 bg-[#FDFCFB]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
           <h2 className="text-4xl font-serif mb-4">Expériences Clés</h2>
           <p className="text-gray-500">Transformer des besoins complexes en solutions élégantes.</p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
           {PROJECTS.map((project, idx) => (
@@ -435,7 +668,12 @@ const Experience = () => {
               viewport={{ once: true }}
               className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden rounded-3xl aspect-video mb-6 bg-gray-100">
+              <div
+                className="relative overflow-hidden rounded-3xl aspect-video mb-6 bg-gray-100 cursor-zoom-in"
+                data-lightbox-src={project.image}
+                data-lightbox-type="image"
+                data-lightbox-title={project.title}
+              >
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -479,10 +717,16 @@ const Demos = () => {
   return (
     <section id="démos" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl font-serif mb-4">Mes Démos</h2>
           <p className="text-gray-500">Aperçu concret de mes compétences en action.</p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {DEMOS.map((demo) => (
@@ -532,7 +776,7 @@ const Demos = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden"
             >
               <button 
                 onClick={() => setSelectedDemo(null)}
@@ -541,7 +785,7 @@ const Demos = () => {
                 <X size={24} />
               </button>
               
-              <div className="p-8 md:p-12">
+              <div className="p-8 md:p-12 max-h-[90vh] overflow-y-auto">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-3 bg-brand-secondary rounded-2xl text-brand-primary">
                     {selectedDemo.icon}
@@ -563,7 +807,11 @@ const Demos = () => {
                       </span>
                     ))}
                   </div>
-                  {selectedDemo.details.content}
+                  <div
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {selectedDemo.details.content}
+                  </div>
                 </div>
 
                 <button 
@@ -587,10 +835,16 @@ const Toolkit = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
-            <div className="mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
               <h2 className="text-4xl font-serif mb-4">Outils Digitaux & IA</h2>
               <p className="text-gray-500">Maîtrise technique pour une productivité décuplée.</p>
-            </div>
+            </motion.div>
             <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
               {TOOLS_DIGITAL.map((tool, idx) => (
                 <motion.div
@@ -612,10 +866,16 @@ const Toolkit = () => {
           </div>
 
           <div>
-            <div className="mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
               <h2 className="text-4xl font-serif mb-4">Réseaux Sociaux & Liens</h2>
               <p className="text-gray-500">Présence digitale et collaboration.</p>
-            </div>
+            </motion.div>
             <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
               {SOCIAL_MEDIA.map((social, idx) => (
                 <motion.div
@@ -645,10 +905,16 @@ const Education = () => {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
           <h2 className="text-4xl font-serif mb-4">Éducation</h2>
           <p className="text-gray-500">Fondations académiques et certifications.</p>
-        </div>
+        </motion.div>
         <div className="grid md:grid-cols-3 gap-8">
           {EDUCATION.map((edu, idx) => (
             <motion.div 
@@ -683,7 +949,10 @@ const ArtisticSide = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=1000" 
                   alt="Danse & Slam"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover cursor-zoom-in"
+                  data-lightbox-src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=1000"
+                  data-lightbox-type="image"
+                  data-lightbox-title="Danse & Slam"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -699,14 +968,14 @@ const ArtisticSide = () => {
 
           <div>
             <span className="text-[10px] uppercase tracking-widest text-brand-primary font-bold mb-4 block">Au-delà de l'écran</span>
-            <h2 className="text-5xl font-serif mb-8">Danseuse & Slameuse (2018-2019)</h2>
+            <h2 className="text-5xl font-serif mb-8">Slameuse (2018-2019) & Danseuse actuellement</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               La discipline de la piste de danse se traduit directement dans la structure de mon code. 
               Chaque mouvement demande de la précision, chaque séquence demande de la fluidité. 
               <br /><br />
-              Mon parcours de slameuse à l'Alliance Française m'a appris que la communication est une question de résonance. 
+              Mon parcours de slameuse à l'Alliance Française entre 2018 et 2019 m'a appris que la communication est une question de résonance. 
               J'apporte cette capacité narrative à la documentation technique et à la gestion de projet, 
-              rendant les idées complexes plus humaines.
+              rendant les idées complexes plus humaines. La danse reste aujourd'hui une part active de mon équilibre et de ma créativité.
             </p>
             <div className="grid grid-cols-2 gap-8">
               <div>
@@ -744,11 +1013,46 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [fullscreenMedia, setFullscreenMedia] = useState<LightboxMedia | null>(null);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isCvOpen, setIsCvOpen] = useState(false);
+
+  useEffect(() => {
+    if (!fullscreenMedia) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setFullscreenMedia(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenMedia]);
+
   return (
-    <div className="selection:bg-brand-accent selection:text-white">
-      <Navbar />
+    <div
+      className="selection:bg-brand-accent selection:text-white"
+      onClickCapture={(event) => {
+        const target = event.target as HTMLElement;
+        const trigger = target.closest('[data-lightbox-src]') as HTMLElement | null;
+
+        if (!trigger) return;
+
+        event.stopPropagation();
+        setFullscreenMedia({
+          src: trigger.dataset.lightboxSrc || '',
+          type: (trigger.dataset.lightboxType as 'image' | 'video') || 'image',
+          title: trigger.dataset.lightboxTitle || 'Aperçu'
+        });
+      }}
+    >
+      <Navbar onContactClick={() => setIsContactOpen(true)} />
       <main>
-        <Hero />
+        <Hero
+          onContactClick={() => setIsContactOpen(true)}
+          onCvClick={() => setIsCvOpen(true)}
+        />
         <Profile />
         <Experience />
         <Demos />
@@ -757,6 +1061,145 @@ export default function App() {
         <ArtisticSide />
       </main>
       <Footer />
+
+      <AnimatePresence>
+        {isContactOpen && (
+          <div className="fixed inset-0 z-[180] flex items-center justify-center p-4 md:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsContactOpen(false)}
+              className="absolute inset-0 bg-black/65 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 16 }}
+              className="relative w-full max-w-xl rounded-[2rem] bg-white shadow-2xl overflow-hidden"
+            >
+              <button
+                onClick={() => setIsContactOpen(false)}
+                className="absolute top-5 right-5 z-10 p-2 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <X size={20} />
+              </button>
+              <div className="p-8 md:p-10">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-brand-primary font-bold block mb-3">
+                  Contact
+                </span>
+                <h3 className="text-3xl font-serif mb-4">Mes coordonnées</h3>
+                <p className="text-sm text-gray-600 mb-8">
+                  Vous pouvez me joindre par téléphone ou par email selon ce qui vous convient le mieux.
+                </p>
+
+                <div className="space-y-5">
+                  <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Téléphone</p>
+                    <div className="space-y-2 text-sm text-gray-700">
+                      <p><strong>Yas :</strong> 038 58 278 75</p>
+                      <p><strong>Orange :</strong> 037 44 265 96</p>
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">Email</p>
+                    <a
+                      href="mailto:antema.fy01@gmail.com"
+                      className="text-sm text-brand-primary font-medium hover:underline"
+                    >
+                      antema.fy01@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isCvOpen && (
+          <div className="fixed inset-0 z-[190] flex items-center justify-center p-3 md:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCvOpen(false)}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              className="relative w-full max-w-5xl h-[90vh] rounded-[2rem] bg-white shadow-2xl overflow-hidden"
+            >
+              <button
+                onClick={() => setIsCvOpen(false)}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+              <div className="px-6 py-4 border-b border-gray-100">
+                <p className="text-sm font-bold text-brand-primary">Aperçu du CV</p>
+              </div>
+              <iframe
+                src={cvPdf}
+                title="CV Ny Antema Assistant"
+                className="w-full h-[calc(90vh-69px)]"
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {fullscreenMedia && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setFullscreenMedia(null)}
+              className="absolute inset-0 bg-black/85 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
+              className="relative w-full max-w-6xl"
+            >
+              <button
+                onClick={() => setFullscreenMedia(null)}
+                className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 hover:bg-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+              <div className="rounded-[2rem] overflow-hidden bg-white shadow-2xl">
+                <div className="px-6 py-4 border-b border-gray-100">
+                  <p className="text-sm font-bold text-brand-primary">{fullscreenMedia.title}</p>
+                </div>
+                <div className="bg-black flex items-center justify-center">
+                  {fullscreenMedia.type === 'video' ? (
+                    <video
+                      src={fullscreenMedia.src}
+                      controls
+                      autoPlay
+                      className="w-full max-h-[85vh] object-contain"
+                    />
+                  ) : (
+                    <img
+                      src={fullscreenMedia.src}
+                      alt={fullscreenMedia.title}
+                      className="w-full max-h-[85vh] object-contain"
+                    />
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
